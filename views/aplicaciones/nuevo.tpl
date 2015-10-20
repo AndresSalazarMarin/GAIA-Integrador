@@ -1,7 +1,7 @@
 <form id="form1" method="post" action="{$_layoutParams.root}aplicaciones/nuevo" enctype="multipart/form-data">
     <input type="hidden" name="guardar" value="1" />
     <div id="reg_principal">
-        <fieldset id="info_aplicacion">
+        <fieldset class="field_reg" id="info_aplicacion">
             <legend><h1>{$titulo}</h1></legend>
             <div class="form-group">
                 <label>Nombre:</label>

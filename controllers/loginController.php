@@ -49,12 +49,12 @@ class loginController extends Controller{
             
             Session::set('autenticado', true);
             Session::set('usuario', $row['usu_nom_usu']);
-            Session::set('contraseña', $row['usu_clave']);
-            Session::set('id_usuario', $row['usu_id']);
+            Session::set('nombre', $row['usu_nom']);
+            Session::set('contraseña', $this->getSql('pass'));
             Session::set('tipo_v', '');
             Session::set('tiempo', time());
             
-            $this->redireccionar();
+            $this->redireccionar($_POST['de_donde']);
         }
         $this->_view->renderizar('index','login');
     }

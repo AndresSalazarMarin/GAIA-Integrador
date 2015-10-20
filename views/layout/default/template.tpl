@@ -102,11 +102,8 @@ En la consola de LINUX escribir:
             </div>
             <div class="up" id="tit_gaia">{$titulo}</div>
             <div class="up" id="login_gaia">
-                <!--<fieldset> Enmarcar area de login
-                    <legend>Ingresar</legend>
-                </fieldset>-->
                 {if !Session::get('autenticado')}
-                <form name="form1" method="post" action="{$_layoutParams.root}login">
+                <form id="form1" name="form1" method="post" action="{$_layoutParams.root}login">
                     <input type="hidden" value="1" name="enviar"/>
                     <input type="hidden" value="{$_layoutParams.item}" name="de_donde"/>
                     <div id="arealoggin">
@@ -124,49 +121,27 @@ En la consola de LINUX escribir:
                     </div>
                 </form>
                 {else}
-                    <div id="arealoggin">
-                        <input class="defaultButton" type="submit" name="perfil" value="Mi Perfil">
-                        <button class="defaultButton" onclick="location.href='{$_layoutParams.root}login/cerrar'" name="cerrar">Cerrar Sesión</button>
-                        {if isset($roles)}
-                            <li class="defaultButton" id="roles"><a href="">Rol</a>
-                                <ul>
-                                {foreach item=data from=$roles}
-                                    <li><a href="{$_layoutParams.root}aplicaciones/{$data.rol|lower}">{$data.rol}</a></li>
-                                {/foreach}
-                                </ul>
+                    <fieldset class="field_usu">
+                        <legend>{Session::get('nombre')|capitalize}</legend>
+                        <div id="arealoggin">
+                            <li class="defaultButton"><a href="">Mi Perfil</a></li>
+                            {if isset($roles)}
+                                <li class="defaultButton" id="roles"><a href="">Rol</a>
+                                    <ul>
+                                    {foreach item=data from=$roles}
+                                        <li><a href="{$_layoutParams.root}{$_layoutParams.item}/{$data.rol|lower}">{$data.rol}</a></li>
+                                    {/foreach}
+                                    </ul>
+                                </li>
+                            {/if}
+                            <li class="defaultButton">
+                                <a href="{$_layoutParams.root}login/cerrar">Cerrar Sesión</a>
                             </li>
-                        {/if}
-                    </div>
+                        </div>
+                    </fieldset>
                 {/if}
             </div>
         </div>
-        <!--<div class="header">
-            {if !Session::get('autenticado')}
-                <form name="form1" method="post" action="">
-                    <input type="hidden" value="1" name="enviar"/>
-                    <input type="hidden" value="{$_layoutParams.item}" name="de_donde"/>
-                    <div id="arealoggin">
-                        
-                        <input type="text" class="user" name="usuario" placeholder="Usuario" value="{if isset($datos['usuario'])} {$datos['usuario']} {/if}"/><br>
-                        <input type="password" class="user" placeholder="Contraseña" name="pass"/><br>
-                        <input type="submit" class="defaultButton" value="Enviar"/><br>
-                        <a id="registrarse" class="link" href="{$_layoutParams.root}registro">Registrarse</a><br>
-                        <a class="link" href="#">Olvidé mi contraseña</a>
-                    </div>
-                </form>
-            {else}
-                <div id="arealoggin">
-                    <input class="defaultButton" type="submit" name="perfil" value="Mi Perfil">
-                    <button class="defaultButton" onclick="location.href='{$_layoutParams.root}login/cerrar'" name="cerrar">Cerrar Sesión</button>
-                </div>
-            {/if}
-            <a id="linklogo" href="#">
-                <div class="encabezado">
-                    <img class="logogaia" alt="Logo GAIA" src="{$_layoutParams.ruta_img}logogaia.gif" width="220px" />
-                </div>
-            </a>
-            <br><br>
-        </div>-->
         <div id="content">
             <noscript><p>
             Para el correcto funcionamiento de la aplicación debe tener el soporte de JavaScript habilitado

@@ -244,11 +244,11 @@ body {
 #tit_gaia{
     text-align: center;
     font-size: 35pt;
-    width: 60%;
+    width: 56%;
 }
 #login_gaia{
     text-align: right;
-    width: 15%;
+    width: 20%;
 }
 .top-nav{
   vertical-align: middle;
@@ -260,7 +260,49 @@ body {
   display: inline-block;
 }
 
-#arealoggin {
+#login_gaia>.field_usu>#arealoggin{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#login_gaia>.field_usu>#arealoggin li{
+    list-style:none;
+    text-align:left;
+    position:relative;
+}
+
+#login_gaia>.field_usu>#arealoggin li a{
+    color: white;
+    text-decoration:none;
+    padding: 5px;
+    display:block;
+}
+
+#login_gaia>.field_usu>#arealoggin li li a{
+    width:auto;
+    display:block;
+}
+
+#login_gaia>.field_usu>#arealoggin li ul{
+    width: auto;
+    margin:0;
+    display:none;
+    background:#464646;
+    border:1px #ccc solid;
+    position: absolute;
+    left:0%;
+    top:102%;
+}
+
+#login_gaia>.field_usu>#arealoggin li ul li:hover{
+    background:#666;
+}
+
+#login_gaia>.field_usu>#arealoggin li:hover ul{
+    display: block;
+}
+
+#login_gaia>#form1>.field_usu>#arealoggin {
   color: #222;
   font-weight: bold;
   float: right;
@@ -307,7 +349,8 @@ body {
   -moz-user-select: none;
   cursor: pointer;
   white-space: nowrap;
-  padding-left: 8px;
+  padding-left: 1px;
+  padding-right: 1px;
   height: 23px;
   width: auto;
   font-size: 12px;
@@ -379,7 +422,19 @@ body {
 .nomb_apps:hover{
     color: gray;
 }
-fieldset legend{
+
+.field_usu{
+    font-size: 10pt;
+    padding-left: 5px;
+    border: 1px solid #cecece;
+}
+
+.field_usu>legend{
+    margin: 5px;
+    padding: 5px;
+}
+
+.field_reg>legend{
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -389,7 +444,7 @@ fieldset legend{
     background: #464646;
     color: white;
 }
-fieldset{
+.field_reg{
     padding-left: 20px;
     border: 1px solid #cecece;
     background: white;

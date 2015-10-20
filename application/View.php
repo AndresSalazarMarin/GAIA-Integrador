@@ -16,18 +16,11 @@ class View extends Smarty{
         $this->_acl = $_acl;       
     }
     
-    public function renderizar($vista, $item = false, $tipo_v = false){
+    public function renderizar($vista, $item = false){
         $this->template_dir = ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS;
         $this->config_dir = ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'configs'.DS;
         //$this->cache_dir = ROOT.'tmp'.DS.'cache'.DS;
         //$this->compile_dir = ROOT.'tmp'.DS.'template'.DS;
-        if($tipo_v == 1){
-                $menu[] = array(
-                'id' => 'index',
-                'titulo' => 'Administrador',
-                'enlace' => BASE_URL
-            );
-        }
         $menu[] = array(
             'id' => 'index',
             'titulo' => 'Inicio',
@@ -39,6 +32,8 @@ class View extends Smarty{
             'enlace' => BASE_URL.'aplicaciones/'
         );
         
+        $roles = Array();
+        
         if(Session::get('autenticado')){
             $permisos = $this->_acl->getRolUsuario(Session::get('usuario'));
             foreach($permisos as $i=>$key){
@@ -48,8 +43,19 @@ class View extends Smarty{
                         'titulo' => 'Administración de Usuarios',
                         'enlace' => BASE_URL.'usuarios/'
                     );
+                    $roles[] = array(
+                        'rol' => 'Administrador'
+                    );
+                }else if($key['ur_rol'] == 2){
+                    $roles[] = array(
+                        'rol' => 'Estudiante'
+                    );
+                }else if($key['ur_rol'] == 3){
+                    $roles[] = array(
+                        'rol' => 'Profesor'
+                    );
                 }
-            }
+            }            
         }
         
         $js = array();
@@ -70,8 +76,7 @@ class View extends Smarty{
                 'app_name' => APP_NAME,
                 'app_slogan' => APP_SLOGAN,
                 'app_company' => APP_COMPANY
-            ),
-            'otro'=>$tipo_v
+            )
         );
         
         $rutaView = ROOT . 'views' . DS . $this->_controlador . DS . $vista . '.tpl';
@@ -87,6 +92,7 @@ class View extends Smarty{
         }
         
         $this->assign('_acl',$this->_acl);
+        $this->assign('roles',$roles);
         $this->assign('_layoutParams',$_params);
         $this->display('template.tpl');
     }
@@ -99,6 +105,10 @@ class View extends Smarty{
         }else{
             throw new Exception('Erros de JS');
         }
+    }
+    
+    public function administrador(){
+        echo "Admin";
     }
     
 }

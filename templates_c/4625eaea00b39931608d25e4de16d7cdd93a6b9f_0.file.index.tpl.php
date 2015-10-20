@@ -1,26 +1,78 @@
+<?php /* Smarty version 3.1.27, created on 2015-10-20 20:41:02
+         compiled from "C:\xampp\htdocs\Integrador\views\registro\index.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:1745356268abe0303a8_93557529%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4625eaea00b39931608d25e4de16d7cdd93a6b9f' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\Integrador\\views\\registro\\index.tpl',
+      1 => 1445366402,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1745356268abe0303a8_93557529',
+  'variables' => 
+  array (
+    'datos' => 0,
+    'i' => 0,
+    'educa' => 0,
+    'preferencias' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_56268abe2e2707_79594964',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_56268abe2e2707_79594964')) {
+function content_56268abe2e2707_79594964 ($_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once 'C:\\xampp\\htdocs\\Integrador\\libs\\smarty\\libs\\plugins\\modifier.date_format.php';
+
+$_smarty_tpl->properties['nocache_hash'] = '1745356268abe0303a8_93557529';
+?>
 <form name="form1" method="post" action="">
     <div id="reg_principal">
         <fieldset class="field_reg" id="info_personal">
             <legend><h1>Información Personal</h1></legend>
             <div class="form-group">
                 <label>Nombre:</label>
-                <input class="form-control" type="text" name="nombre" {if isset($datos)}{if $datos['nombre'] neq ''}value="{$datos['nombre']}"  {/if}{/if} placeholder="Nombres"/>
+                <input class="form-control" type="text" name="nombre" <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {
+if ($_smarty_tpl->tpl_vars['datos']->value['nombre'] != '') {?>value="<?php echo $_smarty_tpl->tpl_vars['datos']->value['nombre'];?>
+"  <?php }
+}?> placeholder="Nombres"/>
             </div>
             <div class="form-group">
                 <label>Apellido:</label>
-                <input class="form-control" type="text" name="apellido" {if isset($datos)}{if $datos['apellido'] neq ''}value="{$datos['apellido']}"  {/if}{/if} placeholder="Apellidos" />
+                <input class="form-control" type="text" name="apellido" <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {
+if ($_smarty_tpl->tpl_vars['datos']->value['apellido'] != '') {?>value="<?php echo $_smarty_tpl->tpl_vars['datos']->value['apellido'];?>
+"  <?php }
+}?> placeholder="Apellidos" />
             </div>
             <div class="form-group">
                 <label>Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" name="fecha_nac" min="1900-12-31" max="{$smarty.now|date_format:"%Y-%m-%d"}" {if isset($datos)} value="{if $datos['fecha_nac'] neq ''}{$datos['fecha_nac']}{else}{$smarty.now|date_format:"%Y-%m-%d"}"{/if}{/if}/>
+                <input type="date" class="form-control" name="fecha_nac" min="1900-12-31" max="<?php echo smarty_modifier_date_format(time(),"%Y-%m-%d");?>
+" <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {?> value="<?php if ($_smarty_tpl->tpl_vars['datos']->value['fecha_nac'] != '') {
+echo $_smarty_tpl->tpl_vars['datos']->value['fecha_nac'];
+} else {
+echo smarty_modifier_date_format(time(),"%Y-%m-%d");?>
+"<?php }
+}?>/>
             </div>
             <div class="form-group">
                 <label>E-mail:</label>
-                <input class="form-control" type="text" name="email" {if isset($datos)}{if $datos['email'] neq ''}value="{$datos['email']}"  {/if}{/if} placeholder="Correo electronico" />
+                <input class="form-control" type="text" name="email" <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {
+if ($_smarty_tpl->tpl_vars['datos']->value['email'] != '') {?>value="<?php echo $_smarty_tpl->tpl_vars['datos']->value['email'];?>
+"  <?php }
+}?> placeholder="Correo electronico" />
             </div>
             <div class="form-group">
                 <label>Nombre de usuario:</label>
-                <input class="form-control" type="text" name="nomb_usuario" {if isset($datos)}{if $datos['nomb_usuario'] neq ''}value="{$datos['nomb_usuario']}"  {/if}{/if} placeholder="Nombre de usuario unico" />
+                <input class="form-control" type="text" name="nomb_usuario" <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {
+if ($_smarty_tpl->tpl_vars['datos']->value['nomb_usuario'] != '') {?>value="<?php echo $_smarty_tpl->tpl_vars['datos']->value['nomb_usuario'];?>
+"  <?php }
+}?> placeholder="Nombre de usuario unico" />
             </div>
             <div class="form-group">
                 <label>Password:</label>
@@ -43,16 +95,26 @@
             <div class="form-group">
                 <label>Nivel Educativo:</label>
                 <select class="form-control" name="nivel_ed" >
-                    {for $i=0 to 10}
-                        <option name="level[]" value="{$educa[$i].use_id_level}">{$educa[$i].use_level}</option>
-                    {/for}
+                    <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 10+1 - (0) : 0-(10)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                        <option name="level[]" value="<?php echo $_smarty_tpl->tpl_vars['educa']->value[$_smarty_tpl->tpl_vars['i']->value]['use_id_level'];?>
+"><?php echo $_smarty_tpl->tpl_vars['educa']->value[$_smarty_tpl->tpl_vars['i']->value]['use_level'];?>
+</option>
+                    <?php }} ?>
                 </select>
             </div>
             <div class="form-group">
                 <label>Preferencias</label>
-                {for $i=0 to 10}
-                    <input type="checkbox" name="pref[]" value="{$preferencias[$i].use_pre_id}">{$preferencias[$i].use_pre_preferencia}<br>
-                {/for}
+                <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 10+1 - (0) : 0-(10)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                    <input type="checkbox" name="pref[]" value="<?php echo $_smarty_tpl->tpl_vars['preferencias']->value[$_smarty_tpl->tpl_vars['i']->value]['use_pre_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['preferencias']->value[$_smarty_tpl->tpl_vars['i']->value]['use_pre_preferencia'];?>
+<br>
+                <?php }} ?>
             </div>
             <div class="form-group">
                 <label>¿Presenta algún tipo de necesidad especial?</label>
@@ -580,20 +642,29 @@
             <input type="submit" onclick="this.form.action = '?form=2'" class="tests_reg" value="Guardar"/>
     </div>-->
             <div id="hh"></div>
-            <script type="text/javascript">
-                {if isset($datos)}
-                    {for $i=1 to 59}
-                        {if array_key_exists($i,$datos)}
-                            var preg = document.getElementsByName({$i});
+            <?php echo '<script'; ?>
+ type="text/javascript">
+                <?php if (isset($_smarty_tpl->tpl_vars['datos']->value)) {?>
+                    <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 59+1 - (1) : 1-(59)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 1, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                        <?php if (array_key_exists($_smarty_tpl->tpl_vars['i']->value,$_smarty_tpl->tpl_vars['datos']->value)) {?>
+                            var preg = document.getElementsByName(<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+);
                             for(var j=0; j<preg.length; j++){
-                                if(preg[j].value == "{$datos[$i]}"){
+                                if(preg[j].value == "<?php echo $_smarty_tpl->tpl_vars['datos']->value[$_smarty_tpl->tpl_vars['i']->value];?>
+"){
                                     preg[j].checked = true;
                                     //alert(preg[j].value);
                                 }
                             }
-                        {/if}
-                    {/for}
-                {/if}
-            </script>
+                        <?php }?>
+                    <?php }} ?>
+                <?php }?>
+            <?php echo '</script'; ?>
+>
 </form>
-    <!--<input type="button" class="tests_reg" id="cancelar" value="Cancelar" />-->
+    <!--<input type="button" class="tests_reg" id="cancelar" value="Cancelar" />--><?php }
+}
+?>

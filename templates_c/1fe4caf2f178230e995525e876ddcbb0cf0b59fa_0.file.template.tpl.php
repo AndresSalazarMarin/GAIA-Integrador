@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-10-16 21:59:08
+<?php /* Smarty version 3.1.27, created on 2015-10-20 22:18:54
          compiled from "C:\xampp\htdocs\Integrador\views\layout\default\template.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:288715621570c63dba2_32182661%%*/
+/*%%SmartyHeaderCode:72895626a1ae46ac13_27137058%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1fe4caf2f178230e995525e876ddcbb0cf0b59fa' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Integrador\\views\\layout\\default\\template.tpl',
-      1 => 1445025546,
+      1 => 1445372331,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '288715621570c63dba2_32182661',
+  'nocache_hash' => '72895626a1ae46ac13_27137058',
   'variables' => 
   array (
     'titulo' => 0,
@@ -30,13 +30,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5621570c72c004_51094085',
+  'unifunc' => 'content_5626a1ae53c570_25694697',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5621570c72c004_51094085')) {
-function content_5621570c72c004_51094085 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5626a1ae53c570_25694697')) {
+function content_5626a1ae53c570_25694697 ($_smarty_tpl) {
+if (!is_callable('smarty_modifier_capitalize')) require_once 'C:\\xampp\\htdocs\\Integrador\\libs\\smarty\\libs\\plugins\\modifier.capitalize.php';
 
-$_smarty_tpl->properties['nocache_hash'] = '288715621570c63dba2_32182661';
+$_smarty_tpl->properties['nocache_hash'] = '72895626a1ae46ac13_27137058';
 ?>
 <!-- En linux se debe dar permisos a la carpte tmp
 
@@ -195,11 +196,8 @@ logogaia.gif" />
             <div class="up" id="tit_gaia"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
 </div>
             <div class="up" id="login_gaia">
-                <!--<fieldset> Enmarcar area de login
-                    <legend>Ingresar</legend>
-                </fieldset>-->
                 <?php if (!Session::get('autenticado')) {?>
-                <form name="form1" method="post" action="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
+                <form id="form1" name="form1" method="post" action="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
 login">
                     <input type="hidden" value="1" name="enviar"/>
                     <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['item'];?>
@@ -221,14 +219,15 @@ registro/">Registrarse</a>
                     </div>
                 </form>
                 <?php } else { ?>
-                    <div id="arealoggin">
-                        <input class="defaultButton" type="submit" name="perfil" value="Mi Perfil">
-                        <button class="defaultButton" onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
-login/cerrar'" name="cerrar">Cerrar Sesión</button>
-                        <?php if (isset($_smarty_tpl->tpl_vars['roles']->value)) {?>
-                            <li class="defaultButton" id="roles"><a href="">Rol</a>
-                                <ul>
-                                <?php
+                    <fieldset class="field_usu">
+                        <legend><?php echo smarty_modifier_capitalize(Session::get('nombre'));?>
+</legend>
+                        <div id="arealoggin">
+                            <li class="defaultButton"><a href="">Mi Perfil</a></li>
+                            <?php if (isset($_smarty_tpl->tpl_vars['roles']->value)) {?>
+                                <li class="defaultButton" id="roles"><a href="">Rol</a>
+                                    <ul>
+                                    <?php
 $_from = $_smarty_tpl->tpl_vars['roles']->value;
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -239,53 +238,27 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 $_smarty_tpl->tpl_vars['data']->_loop = true;
 $foreach_data_Sav = $_smarty_tpl->tpl_vars['data'];
 ?>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
-aplicaciones/<?php echo mb_strtolower($_smarty_tpl->tpl_vars['data']->value['rol'], 'UTF-8');?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];
+echo $_smarty_tpl->tpl_vars['_layoutParams']->value['item'];?>
+/<?php echo mb_strtolower($_smarty_tpl->tpl_vars['data']->value['rol'], 'UTF-8');?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['rol'];?>
 </a></li>
-                                <?php
+                                    <?php
 $_smarty_tpl->tpl_vars['data'] = $foreach_data_Sav;
 }
 ?>
-                                </ul>
+                                    </ul>
+                                </li>
+                            <?php }?>
+                            <li class="defaultButton">
+                                <a href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
+login/cerrar">Cerrar Sesión</a>
                             </li>
-                        <?php }?>
-                    </div>
+                        </div>
+                    </fieldset>
                 <?php }?>
             </div>
         </div>
-        <!--<div class="header">
-            <?php if (!Session::get('autenticado')) {?>
-                <form name="form1" method="post" action="">
-                    <input type="hidden" value="1" name="enviar"/>
-                    <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['item'];?>
-" name="de_donde"/>
-                    <div id="arealoggin">
-                        
-                        <input type="text" class="user" name="usuario" placeholder="Usuario" value="<?php if (isset($_smarty_tpl->tpl_vars['datos']->value['usuario'])) {?> <?php echo $_smarty_tpl->tpl_vars['datos']->value['usuario'];?>
- <?php }?>"/><br>
-                        <input type="password" class="user" placeholder="Contraseña" name="pass"/><br>
-                        <input type="submit" class="defaultButton" value="Enviar"/><br>
-                        <a id="registrarse" class="link" href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
-registro">Registrarse</a><br>
-                        <a class="link" href="#">Olvidé mi contraseña</a>
-                    </div>
-                </form>
-            <?php } else { ?>
-                <div id="arealoggin">
-                    <input class="defaultButton" type="submit" name="perfil" value="Mi Perfil">
-                    <button class="defaultButton" onclick="location.href='<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
-login/cerrar'" name="cerrar">Cerrar Sesión</button>
-                </div>
-            <?php }?>
-            <a id="linklogo" href="#">
-                <div class="encabezado">
-                    <img class="logogaia" alt="Logo GAIA" src="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['ruta_img'];?>
-logogaia.gif" width="220px" />
-                </div>
-            </a>
-            <br><br>
-        </div>-->
         <div id="content">
             <noscript><p>
             Para el correcto funcionamiento de la aplicación debe tener el soporte de JavaScript habilitado
