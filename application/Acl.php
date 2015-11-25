@@ -30,6 +30,14 @@ class Acl{
         return $role;
     }
     
+    public function getNombreRol($dato) {
+        $role = $this->_db->prepare("select rol_nom from rol where rol_id='$dato'");
+        $role->execute();
+        $this->_db->close_con();
+        $role = $role->fetch();
+        return $role;
+    }
+    
     public function getRolUsuario($usu) {        
         if($usu!=''){
             $permisos = $this->_db->prepare("select * from usu_rol where ur_id_usu='$usu'");
@@ -42,17 +50,29 @@ class Acl{
         return $permisos;
     }
     
-    public function acceso($key){
+    
+    public function noAcceso(){
+        header('location: '.BASE_URL.'error/access/5050');
+        exit;
+    }
+    
+    public function permiso($valor){
+        if(Session::get('tipo_v') == $valor){
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+
+    public function acceso($valor){
         
-        if($this->permiso($key)){
-            Session::tiempo();
+        if($this->permiso($valor)){
+            //Session::tiempo();
             return;
         }
         
         header('location: '.BASE_URL.'error/access/5050');
-        exit;
     }    
 }
 
 ?>
-

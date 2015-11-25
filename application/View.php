@@ -19,8 +19,8 @@ class View extends Smarty{
     public function renderizar($vista, $item = false){
         $this->template_dir = ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS;
         $this->config_dir = ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'configs'.DS;
-        //$this->cache_dir = ROOT.'tmp'.DS.'cache'.DS;
-        //$this->compile_dir = ROOT.'tmp'.DS.'template'.DS;
+        $this->cache_dir = ROOT.'tmp'.DS.'cache'.DS;
+        $this->compile_dir = ROOT.'tmp'.DS.'template'.DS;
         $menu[] = array(
             'id' => 'index',
             'titulo' => 'Inicio',
@@ -36,26 +36,27 @@ class View extends Smarty{
         
         if(Session::get('autenticado')){
             $permisos = $this->_acl->getRolUsuario(Session::get('usuario'));
+            //echo Session::get('tipo_v');
+            $rol = $this->_acl->getRol();
+            
+            // Roles según el Usuario, estos para el menú de roles.
+            
             foreach($permisos as $i=>$key){
-                if($key['ur_rol'] == 1){
-                    $menu[] = array(
-                        'id' => 'usuarios',
-                        'titulo' => 'Administración de Usuarios',
-                        'enlace' => BASE_URL.'usuarios/'
-                    );
-                    $roles[] = array(
-                        'rol' => 'Administrador'
-                    );
-                }else if($key['ur_rol'] == 2){
-                    $roles[] = array(
-                        'rol' => 'Estudiante'
-                    );
-                }else if($key['ur_rol'] == 3){
-                    $roles[] = array(
-                        'rol' => 'Profesor'
-                    );
+                foreach($rol as $r=>$seg){
+                    if($seg['rol_id'] == $key['ur_rol']){
+                        $roles[] = array(
+                            'rol' => $seg['rol_nom']
+                        );
+                    }
                 }
-            }            
+            }
+            if(Session::get('tipo_v') == 'Administrador'){
+                $menu[] = array(
+                    'id' => 'usuarios',
+                    'titulo' => 'Administración de Usuarios',
+                    'enlace' => BASE_URL.'usuarios/'
+                );
+            }
         }
         
         $js = array();
@@ -83,9 +84,6 @@ class View extends Smarty{
         
         if(is_readable($rutaView)){
             $this->assign('_contenido',$rutaView);
-            /*include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'header.php';
-            include_once $rutaView;
-            include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'footer.php';*/
         }
         else{
             throw new Exception("Error Vista");
@@ -105,10 +103,6 @@ class View extends Smarty{
         }else{
             throw new Exception('Erros de JS');
         }
-    }
-    
-    public function administrador(){
-        echo "Admin";
     }
     
 }

@@ -37,21 +37,20 @@
             </div>
         </fieldset>
         </div>
-        <input type="submit" onclick="this.form.action = '?form=1'" class="tests_reg" value="Guardar Información"/>
-        <!--<fieldset class="field_reg" id="info_educativa">
+        <fieldset class="field_reg" id="info_educativa">
             <legend><h1>Información Educativa</h1></legend>
             <div class="form-group">
                 <label>Nivel Educativo:</label>
                 <select class="form-control" name="nivel_ed" >
                     {for $i=0 to 10}
-                        <option name="level[]" value="{$educa[$i].use_id_level}">{$educa[$i].use_level}</option>
+                        <option name="level[]" value="{$educa[$i].nivel_usu_id}">{$educa[$i].nivel_usu}</option>
                     {/for}
                 </select>
             </div>
             <div class="form-group">
                 <label>Preferencias</label>
                 {for $i=0 to 10}
-                    <input type="checkbox" name="pref[]" value="{$preferencias[$i].use_pre_id}">{$preferencias[$i].use_pre_preferencia}<br>
+                    <input type="checkbox" name="pref[]" value="{$preferencias[$i].pre_usu_id}">{$preferencias[$i].pre_usu_preferencia}<br>
                 {/for}
             </div>
             <div class="form-group">
@@ -578,8 +577,7 @@
                 </table>
             </fieldset>
             <input type="submit" onclick="this.form.action = '?form=2'" class="tests_reg" value="Guardar"/>
-    </div>-->
-            <div id="hh"></div>
+    </div>
             <script type="text/javascript">
                 {if isset($datos)}
                     {for $i=1 to 59}
@@ -596,4 +594,4 @@
                 {/if}
             </script>
 </form>
-    <!--<input type="button" class="tests_reg" id="cancelar" value="Cancelar" />-->
+<input type="button" class="tests_reg" id="cancelar" value="Cancelar" />

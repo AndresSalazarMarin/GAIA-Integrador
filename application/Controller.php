@@ -97,8 +97,8 @@ abstract class Controller
     }
     
     protected function redireccionar($ruta=false){
-        if($ruta){
-            header('location:'.BASE_URL.$ruta);
+        if($ruta != 'index' && $ruta){
+            header('location:'.BASE_URL.$ruta.'/');
             exit;
         }else{
             header('location:'.BASE_URL);

@@ -21,7 +21,7 @@ body {
     line-height: 1;
     font-family: 'Open Sans',sans-serif;
     font-weight: normal;
-    font-size: 13pt;
+    font-size: auto;
 }
 a{
     text-decoration: none;
@@ -154,24 +154,26 @@ body {
   position: relative;
 }
 #unalTop .seal {
-  position: absolute;
-  right: 10px;
-  top: 37px;
-  z-index: 2;
+  float:right;
+  display: inline-block;
+  margin-top: -5.35%;
+  margin-right: 0.5%;
+  position:relative;
+  z-index: 5;
 }
 .navigation .site-url {
   background: no-repeat 0 0 url(../img/locDot.png);
   padding: 0 0 0 20px;
   float: left;
   height: 17px;
-  clear: both;
-  margin: 12px 10px 10px 250px;
-  font-size: 24px;
+  margin: 1% 1% 1% 19%;
   line-height: 18px;
+  font-size: 1.4em;
 }
 .navigation .menu {
-  clear: both;
-  margin: 0 0 0 240px;
+    clear: both;
+    margin: 0 0 0 19%;
+    font-size: 1.4em;
 }
 .dropdown-menu {
   min-width: 0;
@@ -225,6 +227,7 @@ body {
 }
 #content{
     margin: 1.5% 5% 2% 5%;
+    font-size: 1.4em;
 }
 .up{
     height: auto;
@@ -243,7 +246,7 @@ body {
 }
 #tit_gaia{
     text-align: center;
-    font-size: 35pt;
+    font-size: 3.8em;
     width: 56%;
 }
 #login_gaia{

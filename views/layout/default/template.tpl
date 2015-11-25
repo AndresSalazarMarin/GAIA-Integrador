@@ -16,6 +16,29 @@ En la consola de LINUX escribir:
         <script src="{$_layoutParams.root}public/js/jquery.js" type="text/javascript"></script>
         <script src="{$_layoutParams.root}public/js/jquery.validate.js" type="text/javascript"></script>
         
+        
+        <link href="{$_layoutParams.ruta_css}fss/fss-reset.css" rel="stylesheet" type="text/css" />
+        <link href="{$_layoutParams.ruta_css}fss/fss-layout.css" rel="stylesheet" type="text/css" />
+        <link href="{$_layoutParams.ruta_css}fss/fss-text.css" rel="stylesheet" type="text/css" />
+        <link href="{$_layoutParams.ruta_css}fss/print.css" media="print" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-theme-bw-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-theme-wb-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-theme-by-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-theme-yb-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-theme-lgdg-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/framework/preferences/css/fss/fss-text-prefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/lib/jquery/ui/css/fl-theme-by/by.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/lib/jquery/ui/css/fl-theme-yb/yb.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/lib/jquery/ui/css/fl-theme-bw/bw.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/lib/jquery/ui/css/fl-theme-wb/wb.css" />
+        <link rel="stylesheet" type="text/css" href="{$_layoutParams.root}libs/infusion/lib/jquery/ui/css/fl-theme-lgdg/lgdg.css" />
+        <link href="{$_layoutParams.root}libs/infusion/framework/preferences/css/PrefsEditor.css" rel="stylesheet" type="text/css" />
+        <link href="{$_layoutParams.root}libs/infusion/framework/preferences/css/SeparatedPanelPrefsEditor.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="{$_layoutParams.root}libs/infusion/infusion-custom.js"></script>
+        
+        
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -23,6 +46,7 @@ En la consola de LINUX escribir:
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         -->
+        <script type="text/javascript" src="{$_layoutParams.ruta_js}floe.js"></script>
         {if isset($_layoutParams.js) && count($_layoutParams.js)}
             {foreach item=js from=$_layoutParams.js}
                 <script src="{$js}" type="text/javascript"></script>
@@ -48,15 +72,35 @@ En la consola de LINUX escribir:
     </head>
     <body>
         <header id="unalTop">
+        {if Session::get('tipo_v')=='Estudiante' || Session::get('tipo_v')=='Profesor'}
+            <script type="text/javascript">
+                // Barra Accesibilidad FLOE
+                $(document).ready(function () {
+                    floe.setupUIO({
+                        templatePrefix: "{$_layoutParams.root}libs/infusion/framework/preferences/html/",
+                        messagePrefix: "{$_layoutParams.root}libs/infusion/framework/preferences/messages/",
+                        tocTemplate: "{$_layoutParams.root}libs/infusion/components/tableOfContents/html/TableOfContents.html",
+                        template: "{$_layoutParams.root}libs/infusion/framework/preferences/html/SeparatedPanelPrefsEditor.html"
+                    });
+                });
+            </script>
+            <!-- Barra Accesibilidad FLOE -->
+            <div class="flc-prefsEditor-separatedPanel fl-prefsEditor-separatedPanel">
+                <div class="flc-slidingPanel-panel flc-prefsEditor-iframe"></div>
+                <div class="fl-panelBar">
+                    <span class="fl-prefsEditor-buttons">
+                        <button id="Reset" class="flc-prefsEditor-reset fl-prefsEditor-reset"><span class="fl-icon-undo"></span> Restaurar</button>
+                        <button id="" class="flc-slidingPanel-toggleButton fl-prefsEditor-showHide"> Mostrar/Ocultar</button>
+                    </span>
+                </div>
+            </div>
+        {/if}
             <div class="logo">
                 <a href="http://unal.edu.co">
                     <img alt="Escudo de la Universidad Nacional de Colombia" src="{$_layoutParams.ruta_img}escudoUnal.png"/>
                 </a>
                 <div class="diag">
                 </div>
-            </div>
-            <div class="seal">
-                <img alt="Escudo de la República de Colombia" src="{$_layoutParams.ruta_img}sealColombia.png" width="66" height="66" />
             </div>
             <div class="firstMenu">
                 <div class="btn-group tx-srlanguagemenu">
@@ -93,6 +137,10 @@ En la consola de LINUX escribir:
                     {/if}
                 </div>
             </div>
+            <div class="seal">
+                <img alt="Escudo de la República de Colombia" src="{$_layoutParams.ruta_img}sealColombia.png" width="66" height="66" />
+            </div>
+
         </header>
         <div class="header">
             <div class="up" id="img_gaia">
@@ -122,20 +170,20 @@ En la consola de LINUX escribir:
                 </form>
                 {else}
                     <fieldset class="field_usu">
-                        <legend>{Session::get('nombre')|capitalize}</legend>
+                        <legend>{Session::get('nombre')|capitalize} ({Session::get('tipo_v')})</legend>
                         <div id="arealoggin">
                             <li class="defaultButton"><a href="">Mi Perfil</a></li>
                             {if isset($roles)}
-                                <li class="defaultButton" id="roles"><a href="">Rol</a>
+                                <li class="defaultButton" id="roles"><a>Rol</a>
                                     <ul>
                                     {foreach item=data from=$roles}
-                                        <li><a href="{$_layoutParams.root}{$_layoutParams.item}/{$data.rol|lower}">{$data.rol}</a></li>
+                                        <li><a href="{$_layoutParams.root}rol/?num={$data.rol|base64_encode}&band={$_layoutParams.item|base64_encode}">{$data.rol}</a></li>
                                     {/foreach}
                                     </ul>
                                 </li>
                             {/if}
                             <li class="defaultButton">
-                                <a href="{$_layoutParams.root}login/cerrar">Cerrar Sesión</a>
+                                <a href="{$_layoutParams.root}login/cerrar/">Cerrar Sesión</a>
                             </li>
                         </div>
                     </fieldset>

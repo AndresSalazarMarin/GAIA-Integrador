@@ -47,11 +47,20 @@ class loginController extends Controller{
                 exit;
             }*/
             
+            $permisos = $this->_acl->getRolUsuario($row['usu_nom_usu']);
+            $roles = Array();
+            
+            foreach($permisos as $i=>$key){
+                array_push($roles, $key['ur_rol']);
+            }
+            
+            $rol = $this->_acl->getNombreRol($roles[0]);
+            
             Session::set('autenticado', true);
             Session::set('usuario', $row['usu_nom_usu']);
             Session::set('nombre', $row['usu_nom']);
             Session::set('contraseña', $this->getSql('pass'));
-            Session::set('tipo_v', '');
+            Session::set('tipo_v', $rol['rol_nom']);
             Session::set('tiempo', time());
             
             $this->redireccionar($_POST['de_donde']);

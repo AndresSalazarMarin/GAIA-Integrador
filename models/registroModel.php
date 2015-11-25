@@ -23,9 +23,34 @@ class registroModel extends Model{
     public function registrarUsuario($usuario, $nombre, $apellido, $password, $email, $rol, $fec_nac) {
         $random = rand(1782598471,9999999999);
         $password = md5($password);
+        $json = Array();
         
-        $app = $this->_db->query("select * from aplicacion where app_id=1");
+        $app = $this->_db->query("select * from aplicacion");
         $app = $app->fetchall();
+        
+        /*foreach ($app as $key => $value) {
+            $this->_newDB = new Database($value['app_nom_bd'],$value['app_host'],$value['app_nom_usu'],$value['app_clave'],$value['app_puerto']);
+            if($value['app_tipo'] == 1){
+                echo '<pre>';
+                print_r($value);
+                echo '</pre>';
+            }else if($value['app_tipo'] == 2){
+                echo 'Dos';
+            }
+        }
+        
+        $col = $this->_db->prepare("select column_name from information_schema.columns where table_name = 'usuario'");
+        $col->execute();
+        $col = $col->fetchall();
+        
+        foreach($col as $i=>$dato){
+            $json = $dato['column_name'];
+        }
+        
+        echo '<pre>';
+        print_r(json_encode($col));
+        echo '</pre>';
+        exit;*/
         
         foreach ($app as $key => $value) {
             $this->_dbFroac = new Database($value['app_nom_bd'],$value['app_host'],$value['app_nom_usu'],$value['app_clave'],$value['app_puerto']);
@@ -53,6 +78,17 @@ class registroModel extends Model{
                 "update usuarios set estado = 1 where id = $id and codigo = '$codigo'"
                 );
     }
+    
+    public function getNivelEduc(){
+        $niv = $this->_db->query("select * from nivel_usu");
+        return $niv->fetchall();
+    }
+    
+    public function getPreferencias(){
+        $pref = $this->_db->query("select * from preferencia_usu");
+        return $pref->fetchall();
+    }
+    
 }
 
 ?>

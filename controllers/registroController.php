@@ -13,14 +13,24 @@ class registroController extends Controller{
         if(Session::get('autenticado')){
             $this->redireccionar();
         }
-        //$this->_view->assign('educa',$this->_registro->getNivelEduc());
-        //$this->_view->assign('preferencias',$this->_registro->getPreferencias());
+        $this->_view->assign('educa',$this->_registro->getNivelEduc());
+        $this->_view->assign('preferencias',$this->_registro->getPreferencias());
         $this->_view->assign('titulo', "Crear Cuenta");
         $this->_view->setJs(array('registro'));
         
         if(isset($_GET['form'])){//$this->getInt('enviar') == 1){
             $this->_view->assign('datos', $_POST);
             if($_GET['form'] == 1){
+                
+                $this->_registro->registrarUsuario(
+                        $_POST['nomb_usuario'],
+                        $_POST['nombre'],
+                        $_POST['apellido'],
+                        $_POST['pass'],
+                        $_POST['email'],
+                        $_POST['rol'],
+                        $_POST['fecha_nac']);
+                
                 if(!$this->getSql('nombre')){
                     $this->_view->assign('_error', "Debe introducir su nombre");
                     $this->_view->renderizar('index','registro');

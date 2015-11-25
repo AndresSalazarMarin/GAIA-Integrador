@@ -17,12 +17,13 @@ class aplicacionesController extends Controller
     }
     
     public function nuevo(){
+        $this->_acl->acceso('Administrador');
         $this->_view->assign('titulo', 'Nueva Aplicación');
         $this->_view->assign('tipo_app',  $this->_aplicacion->getTipoApp());
         $this->_view->setJs(array('app'));
         if($this->getInt('guardar') == 1){
             $this->_view->assign('datos', $_POST);
-            
+
             if(!$this->getTexto('nombre')){
                 $this->_view->assign('_error', 'Debe introducir nombre');
                 $this->_view->renderizar('nuevo','aplicaciones');
@@ -34,9 +35,9 @@ class aplicacionesController extends Controller
                 exit;
             }
             //Agregar demás verificaciones
-            
+
             $imagen = '';
-            
+
             if(isset($_FILES['imagen']['name'])){
                 $this->getLibrary('upload'.DS.'class.upload');
                 $ruta = ROOT.'public'.DS.'img'.DS.'apps'.DS;
@@ -44,7 +45,7 @@ class aplicacionesController extends Controller
                 $upload->allowed = array('image/*');
                 $upload->file_new_name_body = 'upl_'.uniqid();
                 $upload->process($ruta);
-                
+
                 if($upload->processed){
                     $imagen = $upload->file_dst_name;
                     $thumb = new upload($upload->file_dst_pathname);
@@ -55,11 +56,11 @@ class aplicacionesController extends Controller
                     $thumb->process($ruta.'thumb'.DS);
                 }else{
                     $this->_view->assign('_error',$upload->error);
-                    $this->_view->renderizar('nuevo','aplicacion');
+                    $this->_view->renderizar('nuevo','aplicaciones');
                     exit;
                 }
             }
-            
+
             if($this->_aplicacion->crearApp($_POST['nombre'],$_POST['descp'],$imagen,$_POST['url'],$_POST['host'],$_POST['usu'],$_POST['clave'],$_POST['nom_bd'],$_POST['puerto'],$_POST['tipo'])){
                 $this->_view->assign('datos', false);
                 $this->_view->assign('_confirmacion', 'Conexión exitosa');
@@ -70,9 +71,10 @@ class aplicacionesController extends Controller
                 $this->_view->renderizar('nuevo','aplicaciones');
                 exit;
             }
-            
+
         }
         $this->_view->renderizar('nuevo', 'aplicaciones');
+        exit;
     }
 }
 
